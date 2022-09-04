@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pocket_farma/starting_image.dart';
+import 'package:pocket_farma/login/starting_image.dart';
 
-import 'login_page.dart';
+import 'login/login_page.dart';
 
 void main() {
   runApp(const MyApp());
