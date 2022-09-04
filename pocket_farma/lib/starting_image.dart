@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:medical_project/login_page.dart';
+import 'package:pocket_farma/login_page.dart';
 
 class starting_Image extends StatefulWidget {
   const starting_Image({Key? key}) : super(key: key);

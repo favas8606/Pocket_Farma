@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:medical_project/homeScreen.dart';
-import 'package:medical_project/verification.dart';
+import 'package:pocket_farma/homeScreen.dart';
+import 'package:pocket_farma/verification.dart';
 
 class loginPage extends StatefulWidget {
   loginPage({Key? key}) : super(key: key);
