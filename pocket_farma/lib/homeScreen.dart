@@ -16,7 +16,7 @@ class ScreenHome extends StatefulWidget {
 class _ScreenHomeState extends State<ScreenHome> {
   int currentSelectIndex = 0;
 
-  final pages = [verify(), loginPage(), Account()];
+  final pages = [verify(), Account(),loginPage(), Account()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
