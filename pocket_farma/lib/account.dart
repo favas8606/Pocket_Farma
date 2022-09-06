@@ -17,7 +17,7 @@ class _AccountState extends State<Account> {
     return Scaffold(
         appBar: AppBar(),
         body: ListView.separated(
-            itemBuilder: (Ctx, index) {
+            itemBuilder: (ctx, index) {
               return ListTile(
                 title: objects[index],
               );
