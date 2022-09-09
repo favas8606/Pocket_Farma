@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:pocket_farma/Location.dart';
 import 'package:pocket_farma/account.dart';
+import 'package:pocket_farma/homePage.dart';
 import 'package:pocket_farma/login_page.dart';
 import 'package:pocket_farma/main.dart';
+import 'package:pocket_farma/navBar.dart';
 import 'package:pocket_farma/verification.dart';
 
 class ScreenHome extends StatefulWidget {
@@ -16,7 +19,7 @@ class ScreenHome extends StatefulWidget {
 class _ScreenHomeState extends State<ScreenHome> {
   int currentSelectIndex = 0;
 
-  final pages = [verify(), Account(),loginPage(), Account()];
+  final pages = [homePage(), homePage(), Location_locate(), Account()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
