@@ -20,18 +20,20 @@ class _loginPageState extends State<loginPage> {
       body: SafeArea(
           child: ListView(
         children: <Widget>[
-          Container(
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Container(
               height: 250,
-              color: Colors.blueAccent[700],
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(10),
-              child: const Text(
-                'Pocket Pharama',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 30),
-              )),
+              width: 450,
+              child: Image.asset(
+                'assets/Pocketpharma.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 35,
+          ),
           Container(
             padding: const EdgeInsets.all(10),
             child: TextField(
@@ -44,18 +46,6 @@ class _loginPageState extends State<loginPage> {
               ),
             ),
           ),
-          // TextButton(
-          //   onPressed: () {
-          //     verification(context);
-          //   },
-          //   child: Text('verify account'),
-          //   // child: const Padding(
-          //   //   padding: EdgeInsets.all(8.0),
-          //   //   child: Text(
-          //   //     'Enter for the verification',
-          //   //   ),
-          //   // ),
-          // ),
           Container(
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
@@ -66,10 +56,16 @@ class _loginPageState extends State<loginPage> {
                   verification(context);
                 },
               )),
+          const SizedBox(
+            height: 35,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              const Text('Does not have account?'),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: const Text('Does not have account?'),
+              ),
               TextButton(
                 child: const Text(
                   'Sign up',
@@ -91,3 +87,6 @@ void verification(BuildContext ctx) {
   Navigator.of(ctx).pushReplacement(
       MaterialPageRoute(builder: (ctx) => const Verificatoin()));
 }
+
+
+// 'assets/Pocketpharma.jpg'
