@@ -3,6 +3,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pocket_farma/homeScreen.dart';
 import 'package:pocket_farma/verification.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class loginPage extends StatefulWidget {
   loginPage({Key? key}) : super(key: key);
@@ -11,9 +13,9 @@ class loginPage extends StatefulWidget {
   State<loginPage> createState() => _loginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
-  var emailController = TextEditingController();
+var emailController = TextEditingController();
 
+class _loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class _loginPageState extends State<loginPage> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 35,
           ),
           Container(
@@ -50,10 +52,12 @@ class _loginPageState extends State<loginPage> {
               height: 50,
               padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
               child: ElevatedButton(
-                child: const Text('verify'),
+                child: const Text('VERIFY'),
                 onPressed: () {
                   print(emailController.text);
                   verification(context);
+                  show();
+                  emailController.clear();
                 },
               )),
           const SizedBox(
@@ -62,9 +66,9 @@ class _loginPageState extends State<loginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: const Text('Does not have account?'),
+              const Padding(
+                padding: EdgeInsets.only(left: 15.0),
+                child: Text('Does not have account?'),
               ),
               TextButton(
                 child: const Text(
@@ -81,12 +85,26 @@ class _loginPageState extends State<loginPage> {
       )),
     );
   }
+
+  void verification(BuildContext ctx) async {
+    if (!EmailValidator.validate(emailController.text, true)) {
+      return null;
+    } else {
+      final _sharedPrefs = await SharedPreferences.getInstance();
+      await _sharedPrefs.setBool(save_Key_Name, true);
+      Navigator.of(ctx).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const Verificatoin()));
+    }
+  }
+
+  void show() {
+    if (!EmailValidator.validate(emailController.text, true)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        margin: EdgeInsets.all(10),
+        content: Text("Enter Valid Form"),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
 }
-
-void verification(BuildContext ctx) {
-  Navigator.of(ctx).pushReplacement(
-      MaterialPageRoute(builder: (ctx) => const Verificatoin()));
-}
-
-
-// 'assets/Pocketpharma.jpg'
