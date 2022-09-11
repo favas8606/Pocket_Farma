@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:pocket_farma/homePage.dart';
+
+import 'package:pocket_farma/homeScreen.dart';
 import 'package:pocket_farma/login_page.dart';
 import 'package:pocket_farma/navigation/aboutus.dart';
 import 'package:pocket_farma/navigation/reportProblem.dart';
+import 'package:pocket_farma/verification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class navBar extends StatefulWidget {
   const navBar({Key? key}) : super(key: key);
@@ -106,6 +109,8 @@ class _navBarState extends State<navBar> {
             leading: Icon(Icons.logout),
             title: const Text('Sign Out', style: TextStyle(fontSize: 18)),
             onTap: () {
+              // delete shared Priference
+              signOut();
               // Here you can give your route to navigate
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (ctx) => loginPage()),
@@ -120,7 +125,7 @@ class _navBarState extends State<navBar> {
 
 void homepage(BuildContext ctx) {
   Navigator.of(ctx)
-      .pushReplacement(MaterialPageRoute(builder: (ctx) => const homePage()));
+      .pushReplacement(MaterialPageRoute(builder: (ctx) => const ScreenHome()));
 }
 
 void aboutUs(BuildContext ctx) {
@@ -131,4 +136,9 @@ void aboutUs(BuildContext ctx) {
 void reportProblem(BuildContext ctx) {
   Navigator.of(ctx).pushReplacement(
       MaterialPageRoute(builder: (ctx) => const report_Problem()));
+}
+
+void signOut() async {
+  final _sharedPrefs = await SharedPreferences.getInstance();
+  _sharedPrefs.clear();
 }
