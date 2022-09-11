@@ -66,7 +66,7 @@ class _starting_imageState extends State<starting_Image> {
   }
 
   Future<void> gotoLogin() async {
-    await Future.delayed(Duration(seconds: 20));
+    await Future.delayed(Duration(seconds: 5));
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (ctx) => loginPage()));
   }
