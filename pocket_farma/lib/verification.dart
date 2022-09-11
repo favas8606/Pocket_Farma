@@ -31,7 +31,7 @@ class _VerificatoinState extends State<Verificatoin> {
     });
 
     const oneSec = Duration(seconds: 1);
-    _timer = new Timer.periodic(oneSec, (timer) {
+    _timer = Timer.periodic(oneSec, (timer) {
       setState(() {
         if (_start == 0) {
           _start = 60;
@@ -50,15 +50,15 @@ class _VerificatoinState extends State<Verificatoin> {
     });
 
     const oneSec = Duration(milliseconds: 2000);
-    _timer = new Timer.periodic(oneSec, (timer) {
+    _timer = Timer.periodic(oneSec, (timer) {
       setState(() {
         _isLoading = false;
         _isVerified = true;
       });
     });
 
-    Navigator.of(ctx)
-        .pushReplacement(MaterialPageRoute(builder: (ctx) => ScreenHome()));
+    Navigator.of(ctx).pushReplacement(
+        MaterialPageRoute(builder: (ctx) => const ScreenHome()));
   }
 
   @override
@@ -91,26 +91,23 @@ class _VerificatoinState extends State<Verificatoin> {
                   children: [
                     Container(
                       height: 150,
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundImage: AssetImage(
                           'assets/Pocketpharma.jpg',
                         ),
                         radius: 90,
                       ),
                     ),
-                    FadeInDown(
-                        duration: Duration(milliseconds: 500),
+                    Container(
                         child: const Text(
-                          "Verification",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        )),
+                      "Verification",
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    )),
                     const SizedBox(
                       height: 30,
                     ),
-                    FadeInDown(
-                      delay: Duration(milliseconds: 500),
-                      duration: Duration(milliseconds: 500),
+                    Container(
                       child: Text(
                         "Please enter the OTP code send to your Email",
                         textAlign: TextAlign.center,
@@ -125,14 +122,12 @@ class _VerificatoinState extends State<Verificatoin> {
                     ),
 
                     // Verification Code Input
-                    FadeInDown(
-                      delay: Duration(milliseconds: 600),
-                      duration: Duration(milliseconds: 500),
+                    Container(
                       child: VerificationCode(
                         length: 4,
                         textStyle:
                             const TextStyle(fontSize: 20, color: Colors.black),
-                        underlineColor: Color.fromARGB(255, 70, 65, 65),
+                        underlineColor: const Color.fromARGB(255, 70, 65, 65),
                         keyboardType: TextInputType.number,
                         underlineUnfocusedColor: Colors.black,
                         onCompleted: (value) {
@@ -147,9 +142,7 @@ class _VerificatoinState extends State<Verificatoin> {
                     const SizedBox(
                       height: 20,
                     ),
-                    FadeInDown(
-                      delay: Duration(milliseconds: 700),
-                      duration: Duration(milliseconds: 500),
+                    Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -165,9 +158,10 @@ class _VerificatoinState extends State<Verificatoin> {
                               },
                               child: Text(
                                 _isResendAgain
-                                    ? "Try again in " + _start.toString()
+                                    ? "Try again in $_start"
                                     : "Resend",
-                                style: TextStyle(color: Colors.blueAccent),
+                                style:
+                                    const TextStyle(color: Colors.blueAccent),
                               ))
                         ],
                       ),
@@ -175,9 +169,7 @@ class _VerificatoinState extends State<Verificatoin> {
                     const SizedBox(
                       height: 50,
                     ),
-                    FadeInDown(
-                      delay: Duration(milliseconds: 800),
-                      duration: Duration(milliseconds: 500),
+                    Container(
                       child: MaterialButton(
                         elevation: 0,
                         onPressed: _code.length < 4
