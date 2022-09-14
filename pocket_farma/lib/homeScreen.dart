@@ -23,7 +23,6 @@ class _ScreenHomeState extends State<ScreenHome> {
     _pageController = PageController();
   }
 
-  final pages = const [homePage(), homePage(), Location_locate(), Account()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,8 @@ class _ScreenHomeState extends State<ScreenHome> {
         controller: _pageController,
         onPageChanged: (index) {
           print(_currentIndex);
-          setState(() => pages[index]);
+
+          setState(() => _currentIndex = index);
         },
         children: <Widget>[
           Container(
