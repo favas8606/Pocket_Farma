@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:pocket_farma/starting_image.dart';
+import 'package:pocket_farma/login/starting_image.dart';
 
 const Save_Key_Name = 'userLogedIn';
 
