@@ -4,8 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:pocket_farma/login/sign_up.dart';
 import 'package:pocket_farma/login/verification.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:pocket_farma/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class loginPage extends StatefulWidget {
   loginPage({Key? key}) : super(key: key);
@@ -14,9 +13,12 @@ class loginPage extends StatefulWidget {
   State<loginPage> createState() => _loginPageState();
 }
 
-TextEditingController emailController = TextEditingController();
-
 class _loginPageState extends State<loginPage> {
+  TextEditingController emailController = TextEditingController();
+  String? typeOfUser;
+
+  var newEmail;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +61,7 @@ class _loginPageState extends State<loginPage> {
                         child: TextField(
                           autofocus: true,
                           keyboardType: TextInputType.emailAddress,
+                          autofillHints: const [AutofillHints.email],
                           controller: emailController,
                           decoration: InputDecoration(
                             filled: true,
@@ -69,11 +72,49 @@ class _loginPageState extends State<loginPage> {
                                   width: 3, color: Colors.black),
                             ),
                             hintText: 'Email',
+                            prefixIcon: const Icon(Icons.email),
                           ),
                         ),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SizedBox(
+                          child: DropdownButtonFormField(
+                            decoration: InputDecoration(
+                              hintText: "Choose Your Profession",
+                              filled: true,
+                              fillColor:
+                                  const Color.fromARGB(255, 241, 236, 236),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(
+                                    width: 1.5, color: Colors.black),
+                              ),
+                            ),
+                            value: typeOfUser,
+                            items: const [
+                              DropdownMenuItem<String>(
+                                  value: '', child: Text('-choose-')),
+                              DropdownMenuItem<String>(
+                                  value: 'Doctor', child: Text('Doctor')),
+                              DropdownMenuItem<String>(
+                                  value: 'Medical Distributer',
+                                  child: Text('medical distributer')),
+                              DropdownMenuItem<String>(
+                                  value: 'User', child: Text('User')),
+                            ],
+                            onChanged: (String? value) {
+                              typeOfUser = value;
+                              print(typeOfUser);
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       Container(
                           height: 50,
@@ -82,9 +123,10 @@ class _loginPageState extends State<loginPage> {
                           child: ElevatedButton(
                             child: const Text('VERIFY'),
                             onPressed: () {
-                              print(emailController.text);
+                              // print(emailController.text);
 
-                              verification(context);
+                              // verification(context);
+                              checkExistingEmail();
 
                               show();
                             },
@@ -102,7 +144,9 @@ class _loginPageState extends State<loginPage> {
                                   padding: EdgeInsets.only(left: 15.0),
                                   child: Text(
                                     'Does not have account?',
-                                    style: TextStyle(fontSize: 15),
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                                 TextButton(
@@ -131,17 +175,28 @@ class _loginPageState extends State<loginPage> {
     );
   }
 
-  void verification(BuildContext ctx) async {
-    if (!EmailValidator.validate(emailController.text, true) ||
-        emailController.text.length < 14) {
-      return null;
-    } else {
-      emailValue = emailController.text;
+  void checkExistingEmail() async {
+    // final CollectionReference fetchEmail =
+    // Firestore.instance.collection('$typeOfUser');
 
-      Navigator.of(ctx)
-          .pushReplacement(MaterialPageRoute(builder: (ctx) => const verify()));
-    }
+    // newEmail = FirebaseFirestore.instance
+    //     .collection("[$typeOfUser]")
+    //     .where("Email", isEqualTo: emailController.text);
+
+    // print('');
   }
+
+  // void verification(BuildContext ctx) async {
+  //   if (!EmailValidator.validate(emailController.text, true) ||
+  //       emailController.text.length < 14) {
+  //     return null;
+  //   } else {
+  //     emailValue = emailController.text;
+
+  //     Navigator.of(ctx)
+  //         .pushReplacement(MaterialPageRoute(builder: (ctx) => const verify()));
+  //   }
+  // }
 
   void show() {
     if (!EmailValidator.validate(emailController.text, true) ||
@@ -152,9 +207,9 @@ class _loginPageState extends State<loginPage> {
         content: Text("Enter Valid Form"),
         backgroundColor: Color.fromARGB(255, 250, 103, 92),
       ));
-      emailController.clear();
+      // emailController.clear();
     } else {
-      emailController.clear();
+      // emailController.clear();
     }
   }
 }
