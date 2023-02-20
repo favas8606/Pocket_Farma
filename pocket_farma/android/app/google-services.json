@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941368936387",
+    "project_id": "pocketpharmaproject",
+    "storage_bucket": "pocketpharmaproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941368936387:android:84bef931fce453933a5f76",
+        "android_client_info": {
+          "package_name": "com.example.pocket_farma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941368936387-gs6ukmeft49hffck57q988losljfsvpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb_sTfpDP_qnzzV2gVJop7TeYS09Ka8rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941368936387-gs6ukmeft49hffck57q988losljfsvpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
